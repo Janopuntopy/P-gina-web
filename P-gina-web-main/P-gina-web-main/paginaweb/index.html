@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+        
+
+        <div class="contenedor">
+    <nav class="menu" aria-label="Navegación principal">
+      <div class="brand" aria-hidden="true">
+        <div></div>
+        Hollow Knight
+      </div>
+
+      <ul>
+        <li><a href="#menu" class="nav-link active">Inicio</a></li>
+        <li><a href="#descarga" class="nav-link btn">Descarga</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+    </nav>
+  
+
+  <!-- Secciones de ejemplo (opcional) -->
+  <!-- <section id="menu">
+    <h2>Inicio</h2>
+    <p>Contenido de la sección Menú. Aquí puedes describir tu oferta o lo que quieras mostrar.</p>
+  </section>
+
+  <section id="descarga">
+    <h2>Descarga</h2>
+    <p>Punto para poner el enlace de descarga o información sobre el archivo.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Formulario o datos de contacto (email, teléfono, redes sociales).</p>
+  </section>
+  -->
+
+  <section id="menu">
+    <h2>Contacto</h2>
+    <p> Aqui dejamos el link de la aplicacción movil </p>
+  </section>
+
+
+ </div>
+  <script>
+    // Marcar la opción activa al hacer clic y smooth scroll para anclas internas
+    document.querySelectorAll('.nav-link').forEach(link=>{
+      link.addEventListener('click', (e)=>{
+        // para anclas internas: comportamiento de scroll suave
+        const href = link.getAttribute('href');
+        if(href && href.startsWith('#')){
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if(target){
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        }
+        // administrar la clase active
+        document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+    
+</body>
+</html>
