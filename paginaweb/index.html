@@ -1,68 +1,62 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-        
-
-        <div class="contenedor">
-    <nav class="menu" aria-label="Navegación principal">
-      <div class="brand" aria-hidden="true">
-        <div class="dot"></div>
-        Hollow Knight
-      </div>
-
-      <ul>
-        <li><a href="#menu" class="nav-link active">Inicio</a></li>
-        <li><a href="#descarga" class="nav-link btn">Descarga</a></li>
-        <li><a href="#contacto" class="nav-link">Contacto</a></li>
-      </ul>
-    </nav>
   
 
-  <!-- Secciones de ejemplo (opcional) -->
-  <!-- <section id="menu">
-    <h2>Inicio</h2>
-    <p>Contenido de la sección Menú. Aquí puedes describir tu oferta o lo que quieras mostrar.</p>
-  </section>
+  <div id="mobile-download" style="display:none; text-align:center; margin-top:40px;">
+    <a href="tu_archivo.apk" download>
+        <button style="padding:12px 20px; font-size:18px;">Descargar APK</button>
+    </a>
+</div>
 
-  <section id="descarga">
-    <h2>Descarga</h2>
-    <p>Punto para poner el enlace de descarga o información sobre el archivo.</p>
-  </section>
+<div id="qr-section" style="display:none; text-align:center; margin-top:40px;">
+    <h3>Escanea el código QR para descargar</h3>
+    <canvas id="qrCanvas"></canvas>
+</div>
 
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <p>Formulario o datos de contacto (email, teléfono, redes sociales).</p>
-  </section>
-  -->
+<!-- Librería para generar códigos QR -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+// Detectar si es móvil
+function esMovil() {
+    return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+}
+
+window.onload = function () {
+
+    const apkURL = "https://www.youtube.com/watch?v=zpzdgmqIHOQ&list=RDzpzdgmqIHOQ&start_radio=1"; // <-- pon aquí tu URL real
+
+    if (esMovil()) {
+        // Mostrar botón de descarga en móviles
+        document.getElementById("mobile-download").style.display = "block";
+    } else {
+        // Mostrar QR en PC
+        document.getElementById("qr-section").style.display = "block";
+
+        // Generar QR automáticamente
+        QRCode.toCanvas(
+            document.getElementById("qrCanvas"),
+            apkURL,
+            { width: 250 },
+            function (error) {
+                if (error) console.error(error);
+            }
+        );
+    }
+};
+</script>
 
 
- </div>
-  <script>
-    // Marcar la opción activa al hacer clic y smooth scroll para anclas internas
-    document.querySelectorAll('.nav-link').forEach(link=>{
-      link.addEventListener('click', (e)=>{
-        // para anclas internas: comportamiento de scroll suave
-        const href = link.getAttribute('href');
-        if(href && href.startsWith('#')){
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if(target){
-            target.scrollIntoView({behavior:'smooth', block:'start'});
-          }
-        }
-        // administrar la clase active
-        document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
-  </script>
-    
 </body>
+
 </html>
